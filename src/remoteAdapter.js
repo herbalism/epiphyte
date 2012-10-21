@@ -1,4 +1,4 @@
-define(['underscore', 'remoteStorage', 'when'], 
+define(['underscore', '../ext/remoteStorage', 'when'], 
     function(_, remoteStorage, when) {
 
         var val = {};
