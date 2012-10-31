@@ -1,5 +1,5 @@
 define(
-  ['require', './ext/platform', './ext/couch', './ext/dav', './ext/webfinger', './ext/hardcoded'],
+  ['require', './platform', './couch', './dav', './webfinger', './hardcoded'],
   function (require, platform, couch, dav, webfinger, hardcoded) {
     var getStorageInfo = function (userAddress, cb) {
         if(typeof(userAddress) != 'string') {

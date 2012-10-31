@@ -1,4 +1,4 @@
-define(['file', 'when', 'cell', 'hash'], function(file, when, cell, hash) {
+define(['file', 'when', 'cell', '../ext/hash'], function(file, when, cell, hash) {
     var fixture = function() {
 	var fakeStorage = {
 	    put:function(name, data){

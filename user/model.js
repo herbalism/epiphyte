@@ -1,4 +1,4 @@
-define(["epiphyte", "when", "cell"],
+define(["../remoteAdapter", "when", "cell"],
        function(remote, when, cell) {
 	   console.log("user model");
 	   var loggedIn = when.defer();
