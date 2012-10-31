@@ -1,4 +1,4 @@
-define(['remoteAdapter', 'when', 'user/model', 'cell'], function(remote, when, user, cell) {
+define(['./remoteAdapter', 'when', './user/model', 'cell'], function(remote, when, user, cell) {
     return function(usr) {
 	user = usr || user;
 

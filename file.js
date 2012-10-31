@@ -1,4 +1,4 @@
-define([ 'cell', 'user/model', 'remote/storage', 'when', 'hash'], 
+define([ 'cell', './user/model', './storage', 'when', './ext/hash'], 
        function(cell, user, storage, when, hash) {
     return function(optionalStorage) {
 	storage = optionalStorage || storage
