@@ -1,11 +1,11 @@
-define([ 'cell', './user/model', './storage', 'when', './ext/hash'], 
-       function(cell, user, storage, when, hash) {
+define([ 'phloem', './user/model', './storage', 'when', './ext/hash'], 
+       function(phloem, user, storage, when, hash) {
     return function(optionalStorage) {
 	storage = optionalStorage || storage
 
-	return cell.whenever(storage()).then(
+	return phloem.whenever(storage()).then(
 	    function(storage) {
-		var queue = cell.queue();
+		var queue = phloem.queue();
 
 		var enqueueSingle = function(file) {
 		    var data = when.defer();

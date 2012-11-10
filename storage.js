@@ -1,9 +1,9 @@
-define(['./remoteAdapter', 'when', './user/model', 'cell'], function(remote, when, user, cell) {
+define(['./remoteAdapter', 'when', './user/model', 'phloem'], function(remote, when, user, phloem) {
     return function(usr) {
 	user = usr || user;
 
 	var CATEGORY = 'unadmin'
-	return cell.whenever(user)
+	return phloem.whenever(user)
 	    .then(function(){
 		return {					    
 		    put: function(name, data){

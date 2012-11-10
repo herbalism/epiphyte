@@ -1,9 +1,9 @@
-define(["../remoteAdapter", "when", "cell"],
-       function(remote, when, cell) {
+define(["../remoteAdapter", "when", "phloem"],
+       function(remote, when, phloem) {
 	   console.log("user model");
 	   var loggedIn = when.defer();
 	   var loggedOut = when.defer();
-	   var user = cell.optional();
+	   var user = phloem.optional();
 	   var login = undefined;
 
 

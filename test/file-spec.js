@@ -1,15 +1,15 @@
-define(['file', 'when', 'cell', '../ext/hash'], function(file, when, cell, hash) {
+define(['file', 'when', 'phloem', '../ext/hash'], function(file, when, phloem, hash) {
     var fixture = function() {
 	var fakeStorage = {
 	    put:function(name, data){
 		return when({name:name, data:data})
 	    }
 	};
-	var optional = cell.optional();
+	var optional = phloem.optional();
 
 
 	var result = when.defer();
-	cell.whenever(file(function(){return optional.read})).then(
+	phloem.whenever(file(function(){return optional.read})).then(
 	    function(val) {
 		result.resolve({
 		    storage:fakeStorage,

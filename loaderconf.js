@@ -6,7 +6,7 @@ curl({
 	'underscore': 'ext/underscore'
     },
     packages: {
-	'cell': {
+	'phloem': {
 	    'location':'modules/phloem/src',
             'main':'phloem'
         },
