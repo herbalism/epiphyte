@@ -5,7 +5,7 @@ define([ 'phloem', './user/model', './storage', 'when', './ext/hash'],
 
 	return phloem.whenever(storage()).then(
 	    function(storage) {
-		var queue = phloem.queue();
+		var queue = phloem.queue(function(val) {return val.name});
 		var enqueueSingle = function(file) {
 		    var data = when.defer();
 		    var fileStatus = {
