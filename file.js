@@ -13,13 +13,17 @@ define([ 'phloem', './user/model', './storage', 'when', './ext/hash'],
 			name: file.name,
 			read: data.promise,
 			stored: when(data.promise).then(function(d)  {
-			    return storage.put(hash.SHA1(d), {
+			    return when(storage.put(hash.SHA1(d), {
 				name: file.name,
 				size: file.size,
 				type: file.type,
 				lastModified: file.lastModified,
 				data: d
-			    })})
+			    })).then(function(result) {
+				var dropped = queue.drop(result)
+				return when(dropped).then(function(){return result});
+			    })
+			})
 		    }
 		    
 		    queue.push(fileStatus);

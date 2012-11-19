@@ -64,6 +64,24 @@ define(['file', 'when', 'phloem', '../ext/hash'], function(file, when, phloem, h
 				     name:hash.SHA1(expectedData)
 				 });
 		});
+	},
+	"removes stored files from queue" : function() {
+	    return when(fixture())
+		.then(
+		    function(f) {
+			blob = new Blob(["1234567890"], {type: "image/jpeg"});
+			blob.name = "my-image.jpeg";
+			f.files.enqueue(blob);
+			return when(f.files.queue).then(function(element){
+			    return when(element.value[0].stored).then(function() {
+				return f.files.queue
+			    })
+			})
+		    })
+		.then(function(elements) {
+		    assert.equals(elements.value, []);
+		});
 	}
+
     })
 })

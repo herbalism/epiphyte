@@ -8,22 +8,23 @@ define(["../remoteAdapter", "when", "phloem"],
 
 
 
-	   login = function(name) {
-	       when(remote.login(name, ['unadmin'])).
+	   login = function(name, categories) {
+	       when(remote.login(name, categories)).
 		   then(function(name) {
-		       user.set(createUser(name));
+		       user.set(createUser(name, categories));
 		   },
 		   function() {
 		       user.clear(login);
 		   })
            };
 
-	   var createUser = function(name) {
+	   var createUser = function(name, categories) {
 	       var result = {
 		   'name': name,
 		   'logout': function() {
 		       user.clear(login);
-		   }
+		   },
+		   'categories': categories
 	       };
 	       return result;
 	   }
