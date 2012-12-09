@@ -6,6 +6,7 @@ config["browser tests"] = {
 	      "user/*.js",
 	      "ext/*.js",
 	      "modules/when/*.js",
+	      "modules/lodash/lodash.js",
 	      "modules/phloem/**/*.js"],
     tests: ["test/**/*.js"],
     libs: ["modules/curl/src/curl.js", "loaderconf.js"],

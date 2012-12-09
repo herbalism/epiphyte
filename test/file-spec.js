@@ -65,7 +65,7 @@ define(['file', 'when', 'phloem', '../ext/hash'], function(file, when, phloem, h
 				 });
 		});
 	},
-	"removes stored files from queue" : function() {
+	"//removes stored files from queue" : function() {
 	    return when(fixture())
 		.then(
 		    function(f) {
@@ -74,7 +74,7 @@ define(['file', 'when', 'phloem', '../ext/hash'], function(file, when, phloem, h
 			f.files.enqueue(blob);
 			return when(f.files.queue).then(function(element){
 			    return when(element.value[0].stored).then(function() {
-				return f.files.queue
+				return f.files.queue()
 			    })
 			})
 		    })
