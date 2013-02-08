@@ -46,22 +46,24 @@ define(['file', 'when', 'phloem', '../ext/hash'], function(file, when, phloem, h
 			blob = new Blob(["1234567890"], {type: "image/jpeg"});
 			blob.name = "my-image.jpeg";
 			f.files.enqueue(blob);
-			return f.files.queue
+			return f.files.queue;
 		    })
 		.then(function(element){
-		    return element.value[0].stored
+		    return element.value[0].stored;
 		})
 		.then(function(data) {
-		    var expectedData = "data:image/jpeg;base64,"+btoa("1234567890")
+		    var expectedData = "data:image/jpeg;base64,"+btoa("1234567890");
+                    var hashed = hash.SHA1(expectedData);
 		    assert.match(data, 
 				 {
 				     data:{
 					 name:"my-image.jpeg",
 					 data:expectedData,
 					 size:10,
-					 type:"image/jpeg"
+					 type:"image/jpeg",
+                                         hash:hashed
 				     },
-				     name:hash.SHA1(expectedData)
+				     name:hashed
 				 });
 		});
 	},
@@ -74,14 +76,14 @@ define(['file', 'when', 'phloem', '../ext/hash'], function(file, when, phloem, h
 			f.files.enqueue(blob);
 			return when(f.files.queue).then(function(element){
 			    return when(element.value[0].stored).then(function() {
-				return f.files.queue()
-			    })
-			})
+				return f.files.queue();
+			    });
+			});
 		    })
 		.then(function(elements) {
 		    assert.equals(elements.value, []);
 		});
 	}
 
-    })
-})
+    });
+});
