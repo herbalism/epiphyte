@@ -54,6 +54,18 @@ define(['storage', 'phloem', 'when'],
 			   }).always(done);
 		       }
 		   );
+	       },
+	       "put same index overwites earlier data": function(done) {
+		   phloem.whenever(initStorage()).then(
+		       function(s) {
+			   when.all([s.put("aName", "theData"), s.put("aName", "theData2")]).always(function () {
+			       when(s.ls()).always( function (index) {
+				   buster.assert.equals(index, ["aName"]);
+			       });
+			   }).always(done);
+		       }
+		   );
+		   
 	       }
 	   });
        });

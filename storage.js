@@ -1,4 +1,4 @@
-define(['./remoteAdapter', 'when', './user/model', 'phloem'], function(remote, when, user, phloem) {
+define(['./remoteAdapter', 'when', './user/model', 'phloem', 'lodash'], function(remote, when, user, phloem, _) {
     return function(usr, rem) {
 	user = usr || user;
 	remote = rem || remote;
@@ -20,7 +20,7 @@ define(['./remoteAdapter', 'when', './user/model', 'phloem'], function(remote, w
 			    then(function(){
 				return when(ls()).then( 
 				     function(index) {
-					 return remote.putUserData(prefix + 'index', index.concat([name]), CATEGORY);
+					 return remote.putUserData(prefix + 'index', _.unique(index.concat([name])), CATEGORY);
 				     });
 			    });
 		    },
