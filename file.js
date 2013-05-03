@@ -1,8 +1,7 @@
 define([ 'phloem', './user/model', './storage', 'when', './ext/hash'], 
        function(phloem, user, storage, when, hash) {
     return function(optionalStorage) {
-	storage = optionalStorage || storage;
-
+	storage = optionalStorage || storage('file');
 	return phloem.whenever(storage()).then(
 	    function(storage) {
 		var queue = phloem.queue(function(val) {return val.name;});
@@ -15,7 +14,7 @@ define([ 'phloem', './user/model', './storage', 'when', './ext/hash'],
                             then(function(d)  {
                                      var hashed = hash.SHA1(d);
 			             return when(storage.put(hashed, {
-				                                 name: file.name,
+					                         name: file.name,
 				                                 size: file.size,
 				                                 type: file.type,
 				                                 lastModified: file.lastModified,
@@ -28,7 +27,6 @@ define([ 'phloem', './user/model', './storage', 'when', './ext/hash'],
 			                      });
 			         })
 		    };
-		    
 		    queue.push(fileStatus);
 
 		    var reader = new FileReader();

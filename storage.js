@@ -8,12 +8,14 @@ define(['./remoteAdapter',
 		user, 
 		phloem, 
 		_) {
-    return function(prefix) {
+    return function(pref) {
 	return function( usr, rem) {
 	    user = usr || user;
 	    remote = rem || remote;
-	    var prefix = prefix+"_";
-	    var CATEGORY = 'unadmin'
+	    var prefix = pref+'_';
+	    var CATEGORY = 'unadmin';
+	    var INDEX = '_index__';
+
 	    return phloem.whenever(user)
 		.then(function(){
 		    function get(name) {
@@ -21,7 +23,7 @@ define(['./remoteAdapter',
 		    };
 
 		    function ls() {
-			return when(get('index')).then( function (val) {return val;}, function () { return []; });
+			return when(get(INDEX)).then( function (val) {return val || [];}, function () { return []; });
 		    }
 
 		    return {					    
@@ -30,8 +32,8 @@ define(['./remoteAdapter',
 				then(function(){
 				    return when(ls()).then( 
 					function(index) {
-					    return remote.putUserData(prefix + 'index', _.unique(index.concat([name])), CATEGORY);
-					});
+					    return remote.putUserData(prefix + INDEX, _.unique(index.concat([name])), CATEGORY);
+					}).then( function () { return data; });
 				});
 			},
 			get: get,
