@@ -1,20 +1,31 @@
 define(['./remoteAdapter', 'when', './user/model', 'phloem'], function(remote, when, user, phloem) {
-    return function(usr) {
+    return function(usr, rem) {
 	user = usr || user;
-
+	remote = rem || remote;
+	var prefix = "prefix"+"_";
 	var CATEGORY = 'unadmin'
 	return phloem.whenever(user)
 	    .then(function(){
+		function get(name) {
+		    return remote.fetchUserData(prefix+name, CATEGORY);
+		};
+
+		function ls() {
+		    return when(get('index')).then( function (val) {return val;}, function () { return []; });
+		}
+
 		return {					    
 		    put: function(name, data){
-			return remote.putUserData(name, data, CATEGORY);
+			return when(remote.putUserData(prefix+name, data, CATEGORY)).
+			    then(function(){
+				return when(ls()).then( 
+				     function(index) {
+					 return remote.putUserData(prefix + 'index', [name], CATEGORY);
+				     });
+			    });
 		    },
-		    get: function(name) {
-			return remote.fetchUserData(name, CATEGORY);
-		    },
-		    ls: function() {
-			return [];
-		    }
+		    get: get,
+		    ls: ls
 		}
 	    })
     }
