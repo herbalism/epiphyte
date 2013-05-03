@@ -7,9 +7,14 @@ define(['./remoteAdapter', 'when', './user/model', 'phloem'], function(remote, w
 	    .then(function(){
 		return {					    
 		    put: function(name, data){
-			return remote.putUserData(name, data, CATEGORY)},
+			return remote.putUserData(name, data, CATEGORY);
+		    },
 		    get: function(name) {
-			return remote.fetchUserData(name, CATEGORY)}
+			return remote.fetchUserData(name, CATEGORY);
+		    },
+		    ls: function() {
+			return [];
+		    }
 		}
 	    })
     }
