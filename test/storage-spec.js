@@ -43,6 +43,17 @@ define(['storage', 'phloem', 'when'],
 			   }).always(done);
 		       }
 		   );
+	       },
+	       "lists all items that was put" : function(done) {
+		   phloem.whenever(initStorage()).then(
+		       function(s) {
+			   when.all([s.put("aName", "theData"), s.put("bName", "theData2")]).always(function () {
+			       when(s.ls()).always( function (index) {
+				   buster.assert.equals(index, ["aName", "bName"]);
+			       });
+			   }).always(done);
+		       }
+		   );
 	       }
 	   });
        });

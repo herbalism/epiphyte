@@ -20,7 +20,7 @@ define(['./remoteAdapter', 'when', './user/model', 'phloem'], function(remote, w
 			    then(function(){
 				return when(ls()).then( 
 				     function(index) {
-					 return remote.putUserData(prefix + 'index', [name], CATEGORY);
+					 return remote.putUserData(prefix + 'index', index.concat([name]), CATEGORY);
 				     });
 			    });
 		    },
