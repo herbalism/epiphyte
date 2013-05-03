@@ -20,7 +20,7 @@ define(['storage', 'phloem', 'when'],
 		   }
 	       };
 
-	       return storage(fakeUser, remoteAdapterSimulator);
+	       return storage("prefix")(fakeUser, remoteAdapterSimulator);
 	   };
 
 	   buster.testCase("storage", {
